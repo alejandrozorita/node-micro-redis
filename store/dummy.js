@@ -15,8 +15,13 @@ async function get(tabla, id) {
     return col.find(item => item.id === id) || null;
 }
 
-async function upset(table, data) {
-    db[collection].push(data);
+async function upsert(table, data) {
+    if (!db[table]) {
+        db[table] = [];
+    }
+
+    db[table].push(data);
+    console.log(db)
 }
 async function remove(table, id) {
     return true;
@@ -25,6 +30,6 @@ async function remove(table, id) {
 module.exports = {
     list,
     get,
-    upset,
+    upsert,
     remove,
 } 
